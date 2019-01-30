@@ -5,7 +5,9 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from .forms import UserRegistrationForm
 from applications.events_news.models import Event
-import datetime
+from applications.alumniprofile.models import Profile
+from datetime import datetime
+from time import time
 # Create your views here.
 
 def index(request):
@@ -32,6 +34,7 @@ def auth(request):
             if not (User.objects.filter(username = username).exists() or User.objects.filter(email=email).exists()):
                 User.objects.create_user(username,email,pswd)
                 user = authenticate(username = username, password = pswd)
+                profile = Profile.objects.create(user=user, roll_no=round(time()*1000))
                 login(request,user)
                 return HttpResponseRedirect('/')
             else:
@@ -44,7 +47,7 @@ def auth(request):
 
         user = authenticate(username=username, password=password, request=request)
         login(request,user)
-        user.last_visit = datetime.datetime.now()
+        user.last_visit = datetime.now()
         print(user.last_visit)
         return HttpResponseRedirect('/')
     

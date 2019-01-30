@@ -32,8 +32,8 @@ def upload_photo(instance, filename):
     return 'Profile_Pictures/' + str(instance.user.first_name) +"_" + str(instance.user.last_name)+ ".jpg"
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete = models.CASCADE)
-    roll_no = models.IntegerField(primary_key = True)
+    user = models.OneToOneField(User, on_delete = models.CASCADE, unique = True)
+    roll_no = models.IntegerField(unique = True)
     batch = models.IntegerField(null = True)
     programme = models.CharField(max_length = 50, choices = Constants.DISC_CHOICES)
     branch = models.CharField(choices = Constants.BRANCH, max_length = 20)
@@ -51,4 +51,4 @@ class Profile(models.Model):
     last_visit = models.DateTimeField(default = datetime.datetime.now())
 
     def __str__(self):
-        return self.user.username
+        return '1'

@@ -29,16 +29,16 @@ def edit(request):
         print('processing data')
         form = editProfile(request.POST)
         if form.is_valid():
-            profile = form.save(commit=False)
-            Profile.user = request.user
-            profile.save()
+            profile = Profile.objects.get(user = request.user)
+            print(profile.user.username)
+        return HttpResponseRedirect('/')
 
     else:
         if (not request.user.is_authenticated()):
             return render(request, "/")
 
         user = request.user
-        form = editProfile()
+        form = editProfile({'user': request.user})
         return render(request, "alumniprofile/edit.html", {'form': form, 'user' : user })
 
     

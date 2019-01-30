@@ -58,6 +58,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'AluminiConnect.urls'
+AUTH_PROFILE_MODULE = 'applications.alumniprofile.Profile'
 
 TEMPLATES = [
     {
