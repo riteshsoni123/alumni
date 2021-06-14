@@ -24,19 +24,7 @@
 
 {% block body %}
     {% include 'globals/navbar.html' %}
-    <div class="p-0 m-0 masthead-bg w-100 parallax shadow-sm" style="min-height:150px !important; height:150px !important;"></div>
-
-    <header class="masthead text-center text-white d-flex" style="height:0; min-height:150px; margin-top: 59px">
-        <div class="container my-auto">
-            <div class="row">
-                <div class="col-lg-8 mx-auto align-middle">
-                <h1 class="text-uppercase m-0">
-                    <strong>ADMIN PORTAL</strong>
-                </h1>
-                </div>
-            </div>
-        </div>
-    </header>
+    {% include 'adminportal/masthead.html' %}
       
     <section id="services" class="bg-primary p-1">
         <div class="container my-auto">
@@ -75,7 +63,11 @@
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">{{ profile.name }} ({{ profile.roll_no }})</h5>
+                                <h5 class="card-title">
+                                    {{ profile.name }} ({{ profile.roll_no }})
+                                    <a class="fab fa-linkedin" href="{{ profile.linkedin }}" target="_blank"></a>
+                                    {% if profile.facebook %}<a class="fab fa-facebook-square"></a>{% endif %}
+                                </h5>
                                 <p class="card-text m-0">
                                     Contacts: {{ profile.email }} {{ profile.mobile1 }}<br>
                                     Programme: {{ profile.programme }} in {{ profile.branch }} ({{ profile.year_of_admission }}-{{ profile.batch }})<br>

@@ -7,19 +7,7 @@
 
 {% block body %}
     {% include 'globals/navbar.html' %}
-    <div class="p-0 m-0 masthead-bg w-100 parallax shadow-sm" style="min-height:150px !important; height:150px !important;"></div>
-
-    <header class="masthead text-center text-white d-flex" style="height:0; min-height:150px; margin-top: 59px">
-        <div class="container my-auto">
-            <div class="row">
-                <div class="col-lg-8 mx-auto align-middle">
-                <h1 class="text-uppercase m-0">
-                    <strong>ADMIN PORTAL</strong>
-                </h1>
-                </div>
-            </div>
-        </div>
-    </header>
+    {% include 'adminportal/masthead.html' %}
       
     <section id="services" class="bg-primary p-1">
         <div class="container my-auto">
@@ -45,7 +33,7 @@
             {% endfor %}
         {% endif %}
 
-        <form method="post" class="mt-4" onsubmit="return confirm('Are you sure want to send the email?');">
+        <form method="post" class="mt-4 mb-5" onsubmit="return confirm('Are you sure want to send the email?');">
             {% csrf_token %}
             <div class="row justify-content-center">
                 <div class="col-sm-6 col-lg-3 mb-3">
@@ -92,8 +80,9 @@
             </div>
         </form>
 
-        <div class="row justify-content-center mt-5">
-            <h2 class="text-center mb-4">Email History</h2>
+        <hr>
+        <div class="row justify-content-center mt-5 mb-5">
+            <h2 class="text-center mb-4">Bulk Email History</h2>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -108,7 +97,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for hist in email_history %}
+                        {% for hist in bulk_email_history %}
                         <tr>
                             <td>{{ hist.timestamp }}</td>
                             <td>{{ hist.email_template }}</td>
@@ -117,6 +106,37 @@
                             <td>{{ hist.branch }}</td>
                             <td>{{ hist.total_recipients }}</td>
                             <td>{{ hist.total_delivered }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <hr class="w-100">
+        <div class="row justify-content-center mt-5 mb-5">
+            <h2 class="text-center mb-4">Single Email History</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>Template</th>
+                            <th>Recipient</th>
+                            <th>Programme</th>
+                            <th>Batch</th>
+                            <th>Delivered</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for hist in single_email_history %}
+                        <tr>
+                            <td>{{ hist.timestamp }}</td>
+                            <td>{{ hist.email_template }}</td>
+                            <td>{{ hist.recipient }}</td>
+                            <td>{{ hist.programme }}</td>
+                            <td>{{ hist.batch }}</td>
+                            <td>{{ hist.delivered }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>

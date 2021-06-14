@@ -69,7 +69,7 @@ def send_verification_email_old(user, name, email, yoa, yop, prog, spec, reg_no,
     return result.status_code
 
 
-def send_birthday_wish(name, email):
+def send_birthday_wish_old(name, email):
     api_key = os.environ['MJ_APIKEY_PUBLIC']
     api_secret = os.environ['MJ_APIKEY_PRIVATE']
     sender_email = os.environ['MJ_SENDER_EMAIL']

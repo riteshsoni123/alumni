@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+
 class EmailTemplate(models.Model):
     template_id = models.CharField(max_length=50, unique=True)
     name = models.CharField(max_length=100)
@@ -11,7 +11,7 @@ class EmailTemplate(models.Model):
         return self.name
 
 
-class EmailHistory(models.Model):
+class BulkEmailHistory(models.Model):
     email_template = models.CharField(max_length=100)
     programme = models.CharField(max_length=250)
     batch = models.CharField(max_length=250)
@@ -23,3 +23,18 @@ class EmailHistory(models.Model):
     def __str__(self):
         return self.email_template
 
+
+class SingleEmailHistory(models.Model):
+    email_template = models.CharField(max_length=100)
+    recipient = models.CharField(max_length=100)
+    programme = models.CharField(max_length=250)
+    batch = models.CharField(max_length=250)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    delivered = models.BooleanField(null=True)
+
+    def __str__(self):
+        return self.email_template
+
+
+class AdminSettings(models.Model):
+    birthday_mail = models.BooleanField(null=False, blank=False)

@@ -9,4 +9,3 @@ urlpatterns = [
     path('registrations', views.registrations_index, name='registrations'),
     path('mailservice', views.mailservice_index, name='mailservice'),
 ]
-
